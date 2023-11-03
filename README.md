@@ -9,7 +9,7 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 
 - Microsoft Azure (Virtual Machines/Compute)
 - Remote Desktop
-- Various Command-Line Tools
+- Windows Powershell
 - Various Network Protocols (SSH, RDH, DNS, HTTP/S, ICMP)
 - Wireshark (Protocol Analyzer)
 
@@ -25,10 +25,16 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 
 <h2>High-Level Steps</h2>
 
-- Step 1: 
-- Step 2:
-- Step 3:
-- Step 4:
+- Step 1: Create a Windows 10 Virtual Machine (VM) & Create a Linux (Ubuntu) VM
+- Step 2: Use Remote Desktop to connect to your Windows 10 VM
+- Step 3: Within your Windows 10 Virtual Machine, Install Wireshark
+- Step 4: Open Wireshark and filter for ICMP traffic only
+- Step 5: Ping Ubuntu VM from within the Windows 10 VM 
+- Step 6: Open the Network Security Group your Ubuntu VM is using, disable and re-enable incoming ICMP traffic
+- Step 7: Observe SSH Traffic
+- Step 8: Observe DHCP Traffic
+- Step 9: Observe DNS Traffic
+- Step 10: Observe RDP Traffic
 
 <h2>Actions and Observations</h2>
 
