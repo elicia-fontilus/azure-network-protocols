@@ -43,7 +43,7 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/965d5560-69b0-4812-aadf-86a3cab3f20d)
 </p>
 <p>
-First you'll want to go to https://portal.azure.com
+First, you'll want to go to https://portal.azure.com
 Create 2 VM's one running Windows 10 and the other running on Ubuntu. Then get the public address of Windows 10 VM, which can be found in the virtual machine section.    </p>
 <br />
 
@@ -105,7 +105,7 @@ In the Azure portal Ubuntu private IP address can be in the VM's overview under 
 </p>
 <p>
 Now open Powershell by clicking start in Windows 10 VM and type Powershell. 
- Next to initiate a perpetual/non-stop ping from your Windows 10 VM to your Ubuntu VM we must type in "ping (Ubuntu priavte IP address) -t"</p>
+ Next you will initiate a perpetual/non-stop ping from your Windows 10 VM to your Ubuntu VM we must type in "ping (Ubuntu priavte IP address) -t"</p>
 <br />
 
 <p>
@@ -130,7 +130,7 @@ Back in Azure we will type in Network, select Network Security Group (NSG), sele
 </p>
 <p>
 Select Protocol: ICMP, Action:Deny, Priority:200 (because we want the rule followed above all the others), type any name, and click add. 
-Refresh the page. and now back in the Windows 10 VM, observe the ICMP traffic in WireShark and the command line Ping activity
+Refresh the page. Now back in the Windows 10 VM, observe the ICMP traffic in WireShark and the command line Ping activity
  </p>
 <br />
 
