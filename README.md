@@ -34,6 +34,7 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 - Step 7: Observe DHCP Traffic
 - Step 8: Observe DNS Traffic
 - Step 9: Observe RDP Traffic
+- Step 10: Cleanup
 
 <h2>Actions and Observations</h2>
 
@@ -138,7 +139,7 @@ Refresh the page. and now back in the Windows 10 VM, observe the ICMP traffic in
   ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/68983698-420c-445d-bb0a-9953acbc02f7)
 </p>
 <p>
-Just requests being sent out no replies because we blocked ICMP traffic. In order to unblock ICMP traffic we must go back to our NSG and allow the traffic.</p>
+Just requests being sent out no replies because we disabled ICMP traffic. In order to enable ICMP traffic we must go back to our NSG and allow the traffic.</p>
 <br />
 
 <p>
@@ -146,8 +147,7 @@ Just requests being sent out no replies because we blocked ICMP traffic. In orde
   ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/5f38ea2d-41c0-45c6-903a-7786feace910)
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
+In NSG allow ICMP traffic by simply selecting action:allow. Refresh </p>
 <br />
 
 <p>
@@ -155,7 +155,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/460f8f03-f538-48a6-8718-719470a98682)
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Back in the Windows 10 VM, observe the ICMP traffic in WireShark and the command line Ping activity will start working
 </p>
 <br />
 
@@ -164,7 +164,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/368601a3-b3f5-4820-b3bb-f6aa140efde6)
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Stop the ping activity by "ctrl+c"
 </p>
 <br />
 
@@ -173,7 +173,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/fd1c1df2-dacd-4c7b-be72-d9cdd289f94f)
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Observe DHCP Traffic
+
+From your Windows 10 VM, issue your VM a new IP address from the command line by typing ipconfig /renew
+
 </p>
 <br />
 
@@ -182,7 +185,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/83993a3c-ab88-420e-9389-57bd97051ab7)
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Observe DNS Traffic
+
+From your Windows 10 VM within command line, use nslookup to see what google.com and disney.com’s IP addresses are
 </p>
 <br />
 
@@ -191,22 +196,15 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/eb23839b-3ad5-453d-bf3a-698c6c39d608)
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
+Observe RDP Traffic
+
+Filter for RDP traffic only tcp.port == 3389, which spammed with traffic because RDP is constantly at work between the 2 computers so therefore traffic will always be flowing.</p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+  ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/df254ca4-3902-49a9-9477-992c7709ae58)
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
+Exit Remote Connection and Delete Resource Group so you don't incur costs </p>
 <br />
