@@ -10,7 +10,7 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 - Microsoft Azure (Virtual Machines/Compute)
 - Remote Desktop
 - Windows Powershell
-- Various Network Protocols (SSH, RDH, DNS, HTTP/S, ICMP)
+- Various Network Protocols (DHCP, RDP, DNS, HTTP/S, ICMP)
 - Wireshark (Protocol Analyzer)
 
 <h2>Operating Systems Used </h2>
@@ -31,15 +31,164 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 - Step 4: Open Wireshark and filter for ICMP traffic only
 - Step 5: Ping Ubuntu VM from within the Windows 10 VM 
 - Step 6: Open the Network Security Group your Ubuntu VM is using, disable and re-enable incoming ICMP traffic
-- Step 7: Observe SSH Traffic
-- Step 8: Observe DHCP Traffic
-- Step 9: Observe DNS Traffic
-- Step 10: Observe RDP Traffic
+- Step 7: Observe DHCP Traffic
+- Step 8: Observe DNS Traffic
+- Step 9: Observe RDP Traffic
 
 <h2>Actions and Observations</h2>
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/965d5560-69b0-4812-aadf-86a3cab3f20d)
+</p>
+<p>
+First you'll want to go to https://portal.azure.com
+Create 2 VM's one running Windows 10 and the other running on Ubuntu. Then get the public address of Windows 10 VM, which can be found in the virtual machine section.    </p>
+<br />
+
+<p>
+ 
+  ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/98bd909e-33be-46e9-883c-2fac7f56252b)
+Paste Windows 10 public IP address into Remote Desktop Connection 
+</p>
+<p></p>
+<br />
+
+<p>
+
+  ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/c7d07827-b489-418e-a7d0-c74950fd1d2e)
+  Enter the username and password that we made while setting up the VM
+<p>
+</p>
+<br />
+
+<p>
+
+  ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/7d841398-873d-4b39-8215-f2d7a515311d)
+</p>
+<p>
+Open your internet brower of choice search "wireshark download". Click the first link. Next, you'll download the "Windows x64 Installer" version of wireshark which should be the first link on the page. Once the download is completed you will want to open file (the top right) and finish the rest of Wireshark download. </p>
+<br />
+
+<p>
+
+![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/df59f68f-7ebc-456b-97f8-3905386131a2)
+</p>
+Download Wireshark with it's default settings </p>
+<br />
+
+<p>
+
+</p>
+<br />
+
+<p>
+
+  ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/d0107751-b87b-4fb0-9c9f-7ca17b36fa3d)
+</p>
+<p>
+Open Wireshark and filter the traffic by ICMP</p>
+<br />
+
+<p>
+
+  ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/6664d000-687e-4d97-a1c2-016c672c7638)
+</p>
+<p>
+In the Azure portal Ubuntu private IP address can be in the VM's overview under the networking section. Copy IP address  </p>
+<br />
+
+<p>
+
+  ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/dd3fac37-528a-4ffc-bb10-580a80615708)
+</p>
+<p>
+Now open Powershell by clicking start in Windows 10 VM and type Powershell. 
+ Next to initiate a perpetual/non-stop ping from your Windows 10 VM to your Ubuntu VM we must type in "ping (Ubuntu priavte IP address) -t"</p>
+<br />
+
+<p>
+
+  ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/8c66c6d6-fd8e-4eff-9426-cf665f7f4d40)
+</p>
+Observe ping requests and replies within WireShark. We will leave this to ping non-stop while we go back to the Azure portal and change this VM's firewall to block incoming ICMP traffic. <p>
+</p>
+<br />
+
+<p>
+
+  ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/3dcf872d-fa17-473c-9179-fa1de3e1208b)
+</p>
+<p>
+Back in Azure we will type in Network, select Network Security Group (NSG), select your Ubuntu VM , then inbound security rules, and click "+ add"  </p>
+<br />
+
+<p>
+
+  ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/03855b98-c942-40b2-a152-4715ebe2bd7e)
+</p>
+<p>
+Select Protocol: ICMP, Action:Deny, Priority:200 (because we want the rule followed above all the others), type any name, and click add. 
+Refresh the page. and now back in the Windows 10 VM, observe the ICMP traffic in WireShark and the command line Ping activity
+ </p>
+<br />
+
+<p>
+
+  ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/68983698-420c-445d-bb0a-9953acbc02f7)
+</p>
+<p>
+Just requests being sent out no replies because we blocked ICMP traffic. In order to unblock ICMP traffic we must go back to our NSG and allow the traffic.</p>
+<br />
+
+<p>
+
+  ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/5f38ea2d-41c0-45c6-903a-7786feace910)
+</p>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+</p>
+<br />
+
+<p>
+
+  ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/460f8f03-f538-48a6-8718-719470a98682)
+</p>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+</p>
+<br />
+
+<p>
+
+  ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/368601a3-b3f5-4820-b3bb-f6aa140efde6)
+</p>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+</p>
+<br />
+
+<p>
+
+![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/fd1c1df2-dacd-4c7b-be72-d9cdd289f94f)
+</p>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+</p>
+<br />
+
+<p>
+
+![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/83993a3c-ab88-420e-9389-57bd97051ab7)
+</p>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+</p>
+<br />
+
+<p>
+
+  ![image](https://github.com/elicia-fontilus/azure-network-protocols/assets/149262013/eb23839b-3ad5-453d-bf3a-698c6c39d608)
 </p>
 <p>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
